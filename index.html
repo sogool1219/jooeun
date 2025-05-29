@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barbi & Riel's English</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff5e6;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background-size: cover;
+      background-position: center;
+      transition: background-image 0.5s ease-in-out;
+    }
+    .container {
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      margin-top: 30px;
+    }
+    h1 {
+      font-size: 1.8em;
+      color: #f26b38;
+    }
+    .word {
+      margin: 15px 0;
+    }
+    .word h2 {
+      margin: 0;
+      font-size: 1.4em;
+    }
+    .word p {
+      margin: 5px 0;
+    }
+    button {
+      margin-top: 5px;
+      padding: 5px 10px;
+      font-size: 1em;
+      border: none;
+      background-color: #f26b38;
+      color: white;
+      border-radius: 10px;
+    }
+    .footer {
+      margin-top: 20px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🐾 Today's Words with Barbi & Riel</h1>
+    <div id="words"></div>
+    <div class="footer">Keep going! You're doing great! 💪</div>
+  </div>
+
+  <script>
+    const wordList = [
+      { word: 'curious', meaning: '호기심 많은', sentence: 'The curious cat jumped onto the table.' },
+      { word: 'fluffy', meaning: '푹신한', sentence: 'My pillow is as fluffy as Barbi!' },
+      { word: 'whiskers', meaning: '고양이 수염', sentence: 'Riel’s whiskers twitched when she smelled fish.' },
+      { word: 'purr', meaning: '고양이 골골 소리', sentence: 'Barbi purrs when she's happy.' },
+      { word: 'nap', meaning: '낮잠', sentence: 'I took a nap with Riel this afternoon.' }
+    ];
+
+    const imageList = [
+      'barbi1.jpg',
+      'riel1.jpg',
+      'barbi2.jpg',
+      'riel2.jpg'
+    ];
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      speechSynthesis.speak(utterance);
+    }
+
+    function showWords() {
+      const container = document.getElementById('words');
+      container.innerHTML = '';
+      const todayWords = wordList.slice(0, 5);
+      todayWords.forEach(({ word, meaning, sentence }) => {
+        const div = document.createElement('div');
+        div.className = 'word';
+        div.innerHTML = `
+          <h2>${word}</h2>
+          <p>뜻: ${meaning}</p>
+          <p>예문: ${sentence}</p>
+          <button onclick="speak('${word}')">🔊 발음 듣기</button>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function setRandomBackground() {
+      const random = Math.floor(Math.random() * imageList.length);
+      document.body.style.backgroundImage = `url('${imageList[random]}')`;
+    }
+
+    showWords();
+    setRandomBackground();
+  </script>
+</body>
+</html>
